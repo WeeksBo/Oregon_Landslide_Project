@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oregon Landslide Risk Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard.css"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div id="header">
+    <div id="title-block">
+      <p id="subtitle">Bowen Weeks · Oregon State University · CS 458</p>
+      <h1>Analyzing and Predicting Landslides in Oregon</h1>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+
+    <!-- LEFT: map and slider -->
+    <div id="map-panel">
+      <div id="map"></div>
+      <div id="slider-panel">
+        <div id="slider-row">
+          <span>1928</span>
+          <input type="range" id="year-slider" min="1928" max="2023" value="2023" step="1">
+          <span>2023</span>
+          <div id="selected-year">
+            Selected Year: <span id="year-label">All Time</span>
+          </div>
+          <label class="all-time-label">
+            <input type="checkbox" id="all-time-check" checked> All Time
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: summary and bar chart -->
+    <div id="right-panel">
+
+      <div id="summary">
+        <h2>Summary</h2>
+        <div id="cards">
+          <div class="card" id="card-slides">
+            <div class="card-val" id="stat-slides">--</div>
+            <div class="card-lbl">Landslides</div>
+          </div>
+          <div class="card" id="card-precip">
+            <div class="card-val" id="stat-precip">--</div>
+            <div class="card-lbl">Avg Precip (in)</div>
+          </div>
+          <div class="card" id="card-fires">
+            <div class="card-val" id="stat-fires">--</div>
+            <div class="card-lbl">Wildfire Acres</div>
+          </div>
+          <div class="card" id="card-storms">
+            <div class="card-val" id="stat-storms">--</div>
+            <div class="card-lbl">Storm Events</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="charts">
+        <div class="chart-box">
+          <h3>Annual Totals</h3>
+          <canvas id="bar-chart"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

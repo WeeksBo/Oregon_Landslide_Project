@@ -1,0 +1,128 @@
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  flex-shrink: 0;
+}
+
+/* MAIN LAYOUT */
+#main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* LEFT: map panel — takes 2/3 of screen */
+#map-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+#map { flex: 1; }
+
+/* SLIDER */
+#slider-panel {
+  padding: 8px 16px;
+  flex-shrink: 0;
+}
+#slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#year-slider { flex: 1; cursor: pointer;}
+#year-label  { min-width: 50px; text-align: center;}
+#year-ticks  {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  padding: 0 2px;
+}
+
+/* RIGHT PANEL — takes 1/3 of screen */
+#right-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* SUMMARY CARDS — top half of right panel */
+#summary {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+#cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.card {
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+/* CHARTS — bottom half of right panel */
+#charts {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chart-box {
+  padding: 10px;
+  border-radius: 6px;
+}
+.chart-box canvas { max-height: 140px; }
+
+/* TOOLTIP (Leaflet popup style) */
+.tip {
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* NAV BAR — shared across both pages */
+#nav {
+  display: flex;
+  gap: 4px;
+  padding: 4px 16px;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+}
+.nav-btn {
+  padding: 5px 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  font-size: 12px;
+  text-decoration: none;
+  color: #333;
+}
+.nav-btn:hover { background: #f0f0f0; }
+.nav-btn.active {
+  background: #333;
+  color: white;
+  border-color: #333;
+}
