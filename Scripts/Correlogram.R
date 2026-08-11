@@ -1,7 +1,11 @@
+# Correlogram Script
+# Creates a correlation matrix between landslide events, 
+# precipitation, and temperature (1996 excluded)
+# Requires: slido_time and precip_clean from New_Session_Script.R
 
+library(corrplot)
 
-
-# Count landslides per year
+# Count landslides per year excluding 1996
 yearly_counts <- slido_time %>%
   st_drop_geometry() %>%
   filter(YEAR != 1996) %>%
@@ -18,7 +22,7 @@ cor_matrix <- cor_data %>%
   select(landslides, precipitation, temperature) %>%
   cor(use = "complete.obs")
 
-# Plot
+# Plot correlogram
 corrplot(cor_matrix,
          method = "color",
          type = "upper",
