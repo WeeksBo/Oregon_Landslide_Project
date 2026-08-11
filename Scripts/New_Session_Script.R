@@ -162,3 +162,4 @@ ggplot(county_map) +
     plot.caption  = element_text(hjust = 0.5, size = 8,  color = "gray60"),
     legend.position = "right"
   )
+
