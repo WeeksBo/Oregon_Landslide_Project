@@ -3,11 +3,21 @@ library(sf)
 library(dplyr)
 library(ggplot2)
 library(stringr)
+
+# Load all file paths (paths are relative to my machine change if needed)
+slido_time_path <- "Data/Clean_Data/slido_time.rds"
+slido_map_path  <- "Data/Clean_Data/slido_map.rds"
+slido_raw_path  <- "Data/Raw_Data/SLIDO_Release_4p5_wMetadata.gdb"
+precip_path     <- "Data/Raw_Data/percipitation.csv"
+precip_2025_path <- "Data/Raw_Data/Oregon_percipitation_data.csv"
+fires_path      <- "Data/Raw_Data/ODF_Fire.csv"
+
+
 # Load cleaned data
-slido_time <- readRDS("C:/OSU/CS_458/Data/Clean_Data/slido_time.rds")
-slido_map <- readRDS("C:/OSU/CS_458/Data/Clean_Data/slido_map.rds")
+slido_time <- readRDS(slido_time_path)
+slido_map <- readRDS(slido_map_path)
 slido <- st_read(
-  "C:/OSU/CS_458/Data/Raw_Data/SLIDO_Release_4p5_wMetadata.gdb",
+  slido_raw_path,
   layer = "Historic_Landslide_Points"
 )
 
@@ -19,7 +29,7 @@ yearly_counts <- slido_time %>%
 yearly_no1996 <- yearly_counts %>%
   filter(YEAR != 1996)
 
-precip <- read.csv("C:/OSU/CS_458/Data/Raw_Data/percipitation.csv")
+precip <- read.csv(precip_path)
 
 precip_clean <- precip %>%
   group_by(DATE) %>%
@@ -34,7 +44,7 @@ precip_clean <- precip %>%
 #  layer = "Transportation_Statewide_Road"
 #)
 
-precip_2025 <- read.csv("C:/OSU/CS_458/Data/Raw_Data/Oregon_percipitation_data.csv")
+precip_2025 <- read.csv(precip_2025_path)
 precip_2025_clean <- precip_2025 %>%
   filter(!is.na(PRCP))
 
@@ -55,7 +65,7 @@ slope_data <- slido %>%
   filter(!is.na(SLOPE))
 
 
-fires <- read.csv("C:/OSU/CS_458/Data/Raw_Data/ODF_Fire.csv")
+fires <- read.csv(fires_path)
 
 # Clean and filter to Oregon fires with coordinates
 fires_clean <- fires %>%
@@ -116,7 +126,7 @@ oregon_counties <- counties(state = "OR", cb = TRUE, year = 2020) %>%
   st_transform(crs = 4326)
 
 # Load landslide data
-slido_map <- readRDS("C:/OSU/CS_458/Data/Clean_Data/slido_map.rds") %>%
+slido_map <- readRDS(slido_map_path) %>%
   st_transform(crs = 4326)
 
 # Count landslides per county using spatial join
