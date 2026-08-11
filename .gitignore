@@ -6,6 +6,7 @@
 .quarto
 .positai
 
+
 Data/
 
 .RDataTmp
@@ -14,3 +15,4 @@ Data/
 
 *.rds
 *.csv
+*.zip
